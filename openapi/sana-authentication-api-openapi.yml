@@ -1,0 +1,89 @@
+openapi: 3.1.0
+info:
+  title: Sana Assignments Authentication API
+  version: v0/v1
+  description: Sana's REST API for the Sana AI knowledge/learning platform. Programmatic access to users, groups, programs, assignments, courses, paths, teamspaces, reporting/Insights, and xAPI statements. Authentication is OAuth 2.0 client credentials returning a bearer token; GET requests require the `read` scope and write requests require the `write` scope. The API is served per tenant at https://<domain>.sana.ai.
+  contact:
+    name: Sana API Documentation
+    url: https://docs.sana.ai/api-docs/
+servers:
+- url: https://{domain}.sana.ai
+  description: Per-tenant Sana host
+  variables:
+    domain:
+      default: app
+      description: Your Sana workspace subdomain
+security:
+- bearerAuth: []
+tags:
+- name: Authentication
+paths:
+  /api/token:
+    post:
+      operationId: createAccessToken
+      tags:
+      - Authentication
+      summary: Request an access token using client credentials
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - grant_type
+              - client_id
+              - client_secret
+              properties:
+                grant_type:
+                  type: string
+                  enum:
+                  - client_credentials
+                client_id:
+                  type: string
+                client_secret:
+                  type: string
+                scope:
+                  type: string
+                  description: Comma-separated list of scopes (read, write)
+      responses:
+        '200':
+          description: Access token issued
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  accessToken:
+                    type: string
+                  tokenType:
+                    type: string
+                    example: bearer
+                  expiresIn:
+                    type: integer
+                    example: 3600
+  /api/oauth/token:
+    post:
+      operationId: createXapiOauthToken
+      tags:
+      - Authentication
+      summary: OAuth token endpoint for xAPI
+      security: []
+      responses:
+        '200':
+          description: Access token issued
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Bearer access token obtained from POST /api/token via the OAuth 2.0 client credentials grant.
+    oauth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://{domain}.sana.ai/api/token
+          scopes:
+            read: Read access (required for GET requests)
+            write: Write access (required for POST, PATCH, DELETE requests)

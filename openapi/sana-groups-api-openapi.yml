@@ -1,0 +1,158 @@
+openapi: 3.1.0
+info:
+  title: Sana Assignments Groups API
+  version: v0/v1
+  description: Sana's REST API for the Sana AI knowledge/learning platform. Programmatic access to users, groups, programs, assignments, courses, paths, teamspaces, reporting/Insights, and xAPI statements. Authentication is OAuth 2.0 client credentials returning a bearer token; GET requests require the `read` scope and write requests require the `write` scope. The API is served per tenant at https://<domain>.sana.ai.
+  contact:
+    name: Sana API Documentation
+    url: https://docs.sana.ai/api-docs/
+servers:
+- url: https://{domain}.sana.ai
+  description: Per-tenant Sana host
+  variables:
+    domain:
+      default: app
+      description: Your Sana workspace subdomain
+security:
+- bearerAuth: []
+tags:
+- name: Groups
+paths:
+  /api/v0/groups:
+    get:
+      operationId: listGroups
+      tags:
+      - Groups
+      summary: List all groups
+      parameters:
+      - $ref: '#/components/parameters/next'
+      - $ref: '#/components/parameters/limit'
+      responses:
+        '200':
+          description: A page of groups
+    post:
+      operationId: createGroup
+      tags:
+      - Groups
+      summary: Create a group
+      responses:
+        '201':
+          description: Group created
+  /api/v0/groups/{groupId}:
+    get:
+      operationId: getGroup
+      tags:
+      - Groups
+      summary: Retrieve a group
+      parameters:
+      - $ref: '#/components/parameters/groupId'
+      responses:
+        '200':
+          description: A group
+    patch:
+      operationId: updateGroup
+      tags:
+      - Groups
+      summary: Update a group
+      parameters:
+      - $ref: '#/components/parameters/groupId'
+      responses:
+        '200':
+          description: Group updated
+    delete:
+      operationId: deleteGroup
+      tags:
+      - Groups
+      summary: Delete a group
+      parameters:
+      - $ref: '#/components/parameters/groupId'
+      responses:
+        '204':
+          description: Group deleted
+  /api/v0/groups/{groupId}/users:
+    get:
+      operationId: listGroupUsers
+      tags:
+      - Groups
+      summary: List a group's users
+      parameters:
+      - $ref: '#/components/parameters/groupId'
+      responses:
+        '200':
+          description: A list of users
+    post:
+      operationId: addGroupUsers
+      tags:
+      - Groups
+      summary: Add users to a group
+      parameters:
+      - $ref: '#/components/parameters/groupId'
+      responses:
+        '200':
+          description: Users added
+  /api/v0/groups/{groupId}/users/{userId}:
+    patch:
+      operationId: updateGroupUser
+      tags:
+      - Groups
+      summary: Update a user in a group
+      parameters:
+      - $ref: '#/components/parameters/groupId'
+      - $ref: '#/components/parameters/userId'
+      responses:
+        '200':
+          description: Group membership updated
+    delete:
+      operationId: removeGroupUser
+      tags:
+      - Groups
+      summary: Remove a user from a group
+      parameters:
+      - $ref: '#/components/parameters/groupId'
+      - $ref: '#/components/parameters/userId'
+      responses:
+        '204':
+          description: User removed from group
+components:
+  parameters:
+    limit:
+      name: limit
+      in: query
+      required: false
+      description: Number of items to return (default 100, max 1000)
+      schema:
+        type: integer
+        default: 100
+        maximum: 1000
+    groupId:
+      name: groupId
+      in: path
+      required: true
+      schema:
+        type: string
+    next:
+      name: next
+      in: query
+      required: false
+      description: Cursor to fetch the next batch of results
+      schema:
+        type: string
+    userId:
+      name: userId
+      in: path
+      required: true
+      schema:
+        type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Bearer access token obtained from POST /api/token via the OAuth 2.0 client credentials grant.
+    oauth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://{domain}.sana.ai/api/token
+          scopes:
+            read: Read access (required for GET requests)
+            write: Write access (required for POST, PATCH, DELETE requests)

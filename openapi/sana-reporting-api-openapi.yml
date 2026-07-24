@@ -1,0 +1,151 @@
+openapi: 3.1.0
+info:
+  title: Sana Assignments Reporting API
+  version: v0/v1
+  description: Sana's REST API for the Sana AI knowledge/learning platform. Programmatic access to users, groups, programs, assignments, courses, paths, teamspaces, reporting/Insights, and xAPI statements. Authentication is OAuth 2.0 client credentials returning a bearer token; GET requests require the `read` scope and write requests require the `write` scope. The API is served per tenant at https://<domain>.sana.ai.
+  contact:
+    name: Sana API Documentation
+    url: https://docs.sana.ai/api-docs/
+servers:
+- url: https://{domain}.sana.ai
+  description: Per-tenant Sana host
+  variables:
+    domain:
+      default: app
+      description: Your Sana workspace subdomain
+security:
+- bearerAuth: []
+tags:
+- name: Reporting
+paths:
+  /api/v0/reports:
+    get:
+      operationId: listReports
+      tags:
+      - Reporting
+      summary: List available reports
+      responses:
+        '200':
+          description: A list of reports
+  /api/v0/reports/{reportId}/jobs:
+    post:
+      operationId: createReportJob
+      tags:
+      - Reporting
+      summary: Create a report job
+      parameters:
+      - $ref: '#/components/parameters/reportId'
+      responses:
+        '202':
+          description: Job accepted
+    get:
+      operationId: listReportJobs
+      tags:
+      - Reporting
+      summary: Get report job status list
+      parameters:
+      - $ref: '#/components/parameters/reportId'
+      responses:
+        '200':
+          description: Job status list
+  /api/v0/reports/{reportId}/jobs/{jobId}:
+    get:
+      operationId: getReportJob
+      tags:
+      - Reporting
+      summary: Get a specific report job status
+      parameters:
+      - $ref: '#/components/parameters/reportId'
+      - $ref: '#/components/parameters/jobId'
+      responses:
+        '200':
+          description: Job status
+  /api/v1/reports/query:
+    post:
+      operationId: createInsightsReport
+      tags:
+      - Reporting
+      summary: Create an Insights report from a SQL query
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                query:
+                  type: string
+                  description: The SQL query representing the report
+                format:
+                  type: string
+                  enum:
+                  - csv
+                  - xlsx
+      responses:
+        '200':
+          description: Insights job created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  jobId:
+                    type: string
+                  status:
+                    type: string
+                    enum:
+                    - pending
+                    - successful
+  /api/v1/reports/jobs/{jobId}:
+    get:
+      operationId: getInsightsReportJob
+      tags:
+      - Reporting
+      summary: Get Insights report job status
+      parameters:
+      - $ref: '#/components/parameters/jobId'
+      responses:
+        '200':
+          description: Job status with download link
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  jobId:
+                    type: string
+                  status:
+                    type: string
+                  link:
+                    type: object
+                    properties:
+                      url:
+                        type: string
+                        format: uri
+components:
+  parameters:
+    jobId:
+      name: jobId
+      in: path
+      required: true
+      schema:
+        type: string
+    reportId:
+      name: reportId
+      in: path
+      required: true
+      schema:
+        type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Bearer access token obtained from POST /api/token via the OAuth 2.0 client credentials grant.
+    oauth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://{domain}.sana.ai/api/token
+          scopes:
+            read: Read access (required for GET requests)
+            write: Write access (required for POST, PATCH, DELETE requests)

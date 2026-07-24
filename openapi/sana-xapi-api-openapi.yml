@@ -1,0 +1,43 @@
+openapi: 3.1.0
+info:
+  title: Sana Assignments xAPI API
+  version: v0/v1
+  description: Sana's REST API for the Sana AI knowledge/learning platform. Programmatic access to users, groups, programs, assignments, courses, paths, teamspaces, reporting/Insights, and xAPI statements. Authentication is OAuth 2.0 client credentials returning a bearer token; GET requests require the `read` scope and write requests require the `write` scope. The API is served per tenant at https://<domain>.sana.ai.
+  contact:
+    name: Sana API Documentation
+    url: https://docs.sana.ai/api-docs/
+servers:
+- url: https://{domain}.sana.ai
+  description: Per-tenant Sana host
+  variables:
+    domain:
+      default: app
+      description: Your Sana workspace subdomain
+security:
+- bearerAuth: []
+tags:
+- name: xAPI
+paths:
+  /xapi/v1/statements:
+    post:
+      operationId: postXapiStatements
+      tags:
+      - xAPI
+      summary: Submit xAPI statements
+      responses:
+        '200':
+          description: Statements accepted
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Bearer access token obtained from POST /api/token via the OAuth 2.0 client credentials grant.
+    oauth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://{domain}.sana.ai/api/token
+          scopes:
+            read: Read access (required for GET requests)
+            write: Write access (required for POST, PATCH, DELETE requests)
