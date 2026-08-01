@@ -1,0 +1,56 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/sana-openapi.yml
+entities:
+  - name: User
+    id_path: /api/v0/users/{userId}
+    attributes: [email, firstName, lastName, role, language, customAttributes]
+    relationships:
+      - type: has_many
+        target: Group
+        via: /api/v0/users/{userId}/groups
+      - type: belongs_to
+        target: User
+        via: manager
+      - type: has_many
+        target: Assignment
+        via: /api/v0/users/{userId}/assignments
+  - name: Group
+    id_path: /api/v0/groups/{groupId}
+    relationships:
+      - type: has_many
+        target: User
+        via: /api/v0/groups/{groupId}/users
+  - name: Program
+    id_path: /api/v0/programs/{programId}
+    relationships:
+      - type: has_many
+        target: User
+        via: members
+  - name: Course
+    id_path: /api/v0/courses/{courseId}
+    variants: [link course, native course]
+    relationships:
+      - type: has_many
+        target: User
+        via: completion/reset
+  - name: Path
+    id_path: /api/v0/paths/{pathId}
+  - name: Teamspace
+    id_path: /api/v0/teamspaces/{teamspaceId}
+    relationships:
+      - type: has_many
+        target: User
+        via: /api/v0/teamspaces/{teamspaceId}/members
+  - name: Assignment
+    parent: User
+    via: /api/v0/users/{userId}/assignments
+  - name: Report
+    id_path: /api/v0/reports/{reportId}
+    relationships:
+      - type: has_many
+        target: ReportJob
+        via: /api/v0/reports/{reportId}/jobs
+  - name: ReportJob
+    parent: Report
+    async: true

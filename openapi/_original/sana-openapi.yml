@@ -1,0 +1,643 @@
+# generated: '2026-07-21'
+# method: generated
+# source: https://docs.sana.ai/api-docs/
+# note: >-
+#   Faithful transcription of Sana's published REST API reference (docs.sana.ai/api-docs).
+#   Paths, methods, summaries, auth, scopes, and the two documented request bodies are as
+#   published. operationIds are assigned by API Evangelist (1:1 with the documented
+#   method+path). No schemas beyond documented request fields were invented.
+openapi: 3.1.0
+info:
+  title: Sana API
+  version: v0/v1
+  description: >-
+    Sana's REST API for the Sana AI knowledge/learning platform. Programmatic access to
+    users, groups, programs, assignments, courses, paths, teamspaces, reporting/Insights,
+    and xAPI statements. Authentication is OAuth 2.0 client credentials returning a bearer
+    token; GET requests require the `read` scope and write requests require the `write`
+    scope. The API is served per tenant at https://<domain>.sana.ai.
+  contact:
+    name: Sana API Documentation
+    url: https://docs.sana.ai/api-docs/
+servers:
+  - url: https://{domain}.sana.ai
+    description: Per-tenant Sana host
+    variables:
+      domain:
+        default: app
+        description: Your Sana workspace subdomain
+security:
+  - bearerAuth: []
+tags:
+  - name: Authentication
+  - name: Users
+  - name: Groups
+  - name: Programs
+  - name: Assignments
+  - name: Courses
+  - name: Paths
+  - name: Teamspaces
+  - name: Reporting
+  - name: xAPI
+paths:
+  /api/token:
+    post:
+      operationId: createAccessToken
+      tags: [Authentication]
+      summary: Request an access token using client credentials
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [grant_type, client_id, client_secret]
+              properties:
+                grant_type:
+                  type: string
+                  enum: [client_credentials]
+                client_id:
+                  type: string
+                client_secret:
+                  type: string
+                scope:
+                  type: string
+                  description: Comma-separated list of scopes (read, write)
+      responses:
+        '200':
+          description: Access token issued
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  accessToken:
+                    type: string
+                  tokenType:
+                    type: string
+                    example: bearer
+                  expiresIn:
+                    type: integer
+                    example: 3600
+  /api/oauth/token:
+    post:
+      operationId: createXapiOauthToken
+      tags: [Authentication]
+      summary: OAuth token endpoint for xAPI
+      security: []
+      responses:
+        '200':
+          description: Access token issued
+  /api/v0/users:
+    get:
+      operationId: listUsers
+      tags: [Users]
+      summary: List all users
+      parameters:
+        - $ref: '#/components/parameters/next'
+        - $ref: '#/components/parameters/limit'
+      responses:
+        '200': { description: A page of users }
+    post:
+      operationId: createUser
+      tags: [Users]
+      summary: Create a user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [email]
+              properties:
+                email: { type: string, format: email }
+                firstName: { type: string }
+                lastName: { type: string }
+                role:
+                  type: string
+                  enum: [learner, group-admin, admin]
+                language:
+                  type: string
+                  description: IETF BCP 47 language tag
+                customAttributes:
+                  type: object
+                  additionalProperties: true
+      responses:
+        '201': { description: User created }
+  /api/v0/users/{userId}:
+    get:
+      operationId: getUser
+      tags: [Users]
+      summary: Retrieve a specific user
+      parameters: [ { $ref: '#/components/parameters/userId' } ]
+      responses:
+        '200': { description: A user }
+    patch:
+      operationId: updateUser
+      tags: [Users]
+      summary: Update a user
+      parameters: [ { $ref: '#/components/parameters/userId' } ]
+      responses:
+        '200': { description: User updated }
+    delete:
+      operationId: deleteUser
+      tags: [Users]
+      summary: Delete a user
+      parameters: [ { $ref: '#/components/parameters/userId' } ]
+      responses:
+        '204': { description: User deleted }
+  /api/v0/users/{userId}/send-invite:
+    post:
+      operationId: sendUserInvite
+      tags: [Users]
+      summary: Send an invite email to a user
+      parameters: [ { $ref: '#/components/parameters/userId' } ]
+      responses:
+        '200': { description: Invite sent }
+  /api/v0/users/{userId}/invite-link:
+    post:
+      operationId: createUserInviteLink
+      tags: [Users]
+      summary: Generate a new invite link for a user
+      parameters: [ { $ref: '#/components/parameters/userId' } ]
+      responses:
+        '200': { description: Invite link generated }
+  /api/v0/users/{userId}/groups:
+    get:
+      operationId: listUserGroups
+      tags: [Users]
+      summary: List a user's groups
+      parameters: [ { $ref: '#/components/parameters/userId' } ]
+      responses:
+        '200': { description: A list of groups }
+  /api/v0/users/{userId}/manager/{managerId}:
+    put:
+      operationId: setUserManager
+      tags: [Users]
+      summary: Set a user's manager
+      parameters:
+        - { $ref: '#/components/parameters/userId' }
+        - name: managerId
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        '200': { description: Manager set }
+  /api/v0/users/{userId}/manager:
+    delete:
+      operationId: removeUserManager
+      tags: [Users]
+      summary: Remove a user's manager
+      parameters: [ { $ref: '#/components/parameters/userId' } ]
+      responses:
+        '204': { description: Manager removed }
+  /api/v0/users/attributes-schema:
+    get:
+      operationId: getUserAttributesSchema
+      tags: [Users]
+      summary: List the custom attribute schema
+      responses:
+        '200': { description: Attribute schema }
+  /api/v0/groups:
+    get:
+      operationId: listGroups
+      tags: [Groups]
+      summary: List all groups
+      parameters:
+        - $ref: '#/components/parameters/next'
+        - $ref: '#/components/parameters/limit'
+      responses:
+        '200': { description: A page of groups }
+    post:
+      operationId: createGroup
+      tags: [Groups]
+      summary: Create a group
+      responses:
+        '201': { description: Group created }
+  /api/v0/groups/{groupId}:
+    get:
+      operationId: getGroup
+      tags: [Groups]
+      summary: Retrieve a group
+      parameters: [ { $ref: '#/components/parameters/groupId' } ]
+      responses:
+        '200': { description: A group }
+    patch:
+      operationId: updateGroup
+      tags: [Groups]
+      summary: Update a group
+      parameters: [ { $ref: '#/components/parameters/groupId' } ]
+      responses:
+        '200': { description: Group updated }
+    delete:
+      operationId: deleteGroup
+      tags: [Groups]
+      summary: Delete a group
+      parameters: [ { $ref: '#/components/parameters/groupId' } ]
+      responses:
+        '204': { description: Group deleted }
+  /api/v0/groups/{groupId}/users:
+    get:
+      operationId: listGroupUsers
+      tags: [Groups]
+      summary: List a group's users
+      parameters: [ { $ref: '#/components/parameters/groupId' } ]
+      responses:
+        '200': { description: A list of users }
+    post:
+      operationId: addGroupUsers
+      tags: [Groups]
+      summary: Add users to a group
+      parameters: [ { $ref: '#/components/parameters/groupId' } ]
+      responses:
+        '200': { description: Users added }
+  /api/v0/groups/{groupId}/users/{userId}:
+    patch:
+      operationId: updateGroupUser
+      tags: [Groups]
+      summary: Update a user in a group
+      parameters:
+        - { $ref: '#/components/parameters/groupId' }
+        - { $ref: '#/components/parameters/userId' }
+      responses:
+        '200': { description: Group membership updated }
+    delete:
+      operationId: removeGroupUser
+      tags: [Groups]
+      summary: Remove a user from a group
+      parameters:
+        - { $ref: '#/components/parameters/groupId' }
+        - { $ref: '#/components/parameters/userId' }
+      responses:
+        '204': { description: User removed from group }
+  /api/v0/programs:
+    get:
+      operationId: listPrograms
+      tags: [Programs]
+      summary: List programs
+      parameters:
+        - $ref: '#/components/parameters/next'
+        - $ref: '#/components/parameters/limit'
+      responses:
+        '200': { description: A page of programs }
+    post:
+      operationId: createProgram
+      tags: [Programs]
+      summary: Create a program
+      responses:
+        '201': { description: Program created }
+  /api/v0/programs/{programId}:
+    get:
+      operationId: getProgram
+      tags: [Programs]
+      summary: Retrieve a program
+      parameters: [ { $ref: '#/components/parameters/programId' } ]
+      responses:
+        '200': { description: A program }
+    patch:
+      operationId: updateProgram
+      tags: [Programs]
+      summary: Update a program
+      parameters: [ { $ref: '#/components/parameters/programId' } ]
+      responses:
+        '200': { description: Program updated }
+    delete:
+      operationId: deleteProgram
+      tags: [Programs]
+      summary: Delete a program
+      parameters: [ { $ref: '#/components/parameters/programId' } ]
+      responses:
+        '204': { description: Program deleted }
+  /api/v0/programs/{programId}/members:
+    post:
+      operationId: enrollProgramMembers
+      tags: [Programs]
+      summary: Enroll users in a program
+      parameters: [ { $ref: '#/components/parameters/programId' } ]
+      responses:
+        '200': { description: Users enrolled }
+    delete:
+      operationId: unenrollProgramMembers
+      tags: [Programs]
+      summary: Unenroll users from a program
+      parameters: [ { $ref: '#/components/parameters/programId' } ]
+      responses:
+        '204': { description: Users unenrolled }
+  /api/v0/users/{userId}/assignments:
+    get:
+      operationId: listUserAssignments
+      tags: [Assignments]
+      summary: List a user's assignments
+      parameters: [ { $ref: '#/components/parameters/userId' } ]
+      responses:
+        '200': { description: A list of assignments }
+    post:
+      operationId: assignContentToUser
+      tags: [Assignments]
+      summary: Assign content to a user
+      parameters: [ { $ref: '#/components/parameters/userId' } ]
+      responses:
+        '200': { description: Content assigned }
+    delete:
+      operationId: removeUserAssignment
+      tags: [Assignments]
+      summary: Remove an assignment from a user
+      parameters: [ { $ref: '#/components/parameters/userId' } ]
+      responses:
+        '204': { description: Assignment removed }
+  /api/v0/courses:
+    get:
+      operationId: listCourses
+      tags: [Courses]
+      summary: List courses
+      parameters:
+        - $ref: '#/components/parameters/next'
+        - $ref: '#/components/parameters/limit'
+      responses:
+        '200': { description: A page of courses }
+    post:
+      operationId: createLinkCourse
+      tags: [Courses]
+      summary: Create a link course
+      responses:
+        '201': { description: Link course created }
+  /api/v1/courses:
+    post:
+      operationId: createNativeCourse
+      tags: [Courses]
+      summary: Create a native course
+      responses:
+        '201': { description: Native course created }
+  /api/v1/courses/bulk-link-upsert:
+    post:
+      operationId: bulkLinkUpsertCourses
+      tags: [Courses]
+      summary: Bulk create/update link courses
+      responses:
+        '200': { description: Courses upserted }
+  /api/v0/courses/{courseId}:
+    get:
+      operationId: getCourse
+      tags: [Courses]
+      summary: Retrieve a course
+      parameters: [ { $ref: '#/components/parameters/courseId' } ]
+      responses:
+        '200': { description: A course }
+    patch:
+      operationId: updateCourse
+      tags: [Courses]
+      summary: Update a course
+      parameters: [ { $ref: '#/components/parameters/courseId' } ]
+      responses:
+        '200': { description: Course updated }
+    delete:
+      operationId: deleteCourse
+      tags: [Courses]
+      summary: Delete a course
+      parameters: [ { $ref: '#/components/parameters/courseId' } ]
+      responses:
+        '204': { description: Course deleted }
+  /api/v0/courses/{courseId}/completed/{userId}:
+    post:
+      operationId: markCourseCompleted
+      tags: [Courses]
+      summary: Mark a course as completed for a user
+      parameters:
+        - { $ref: '#/components/parameters/courseId' }
+        - { $ref: '#/components/parameters/userId' }
+      responses:
+        '200': { description: Completion recorded }
+  /api/v0/courses/{courseId}/reset/{userId}:
+    post:
+      operationId: resetCourseProgress
+      tags: [Courses]
+      summary: Reset a user's course progress
+      parameters:
+        - { $ref: '#/components/parameters/courseId' }
+        - { $ref: '#/components/parameters/userId' }
+      responses:
+        '200': { description: Progress reset }
+  /api/v0/paths:
+    get:
+      operationId: listPaths
+      tags: [Paths]
+      summary: List paths
+      parameters:
+        - $ref: '#/components/parameters/next'
+        - $ref: '#/components/parameters/limit'
+      responses:
+        '200': { description: A page of paths }
+  /api/v0/paths/{pathId}:
+    get:
+      operationId: getPath
+      tags: [Paths]
+      summary: Retrieve a path
+      parameters:
+        - name: pathId
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        '200': { description: A path }
+  /api/v0/teamspaces:
+    get:
+      operationId: listTeamspaces
+      tags: [Teamspaces]
+      summary: List teamspaces
+      responses:
+        '200': { description: A list of teamspaces }
+    post:
+      operationId: createTeamspace
+      tags: [Teamspaces]
+      summary: Create a teamspace
+      responses:
+        '201': { description: Teamspace created }
+  /api/v0/teamspaces/{teamspaceId}:
+    get:
+      operationId: getTeamspace
+      tags: [Teamspaces]
+      summary: Retrieve a teamspace
+      parameters: [ { $ref: '#/components/parameters/teamspaceId' } ]
+      responses:
+        '200': { description: A teamspace }
+    delete:
+      operationId: deleteTeamspace
+      tags: [Teamspaces]
+      summary: Delete a teamspace
+      parameters: [ { $ref: '#/components/parameters/teamspaceId' } ]
+      responses:
+        '204': { description: Teamspace deleted }
+  /api/v0/teamspaces/{teamspaceId}/members:
+    get:
+      operationId: listTeamspaceMembers
+      tags: [Teamspaces]
+      summary: List teamspace members
+      parameters: [ { $ref: '#/components/parameters/teamspaceId' } ]
+      responses:
+        '200': { description: A list of members }
+    post:
+      operationId: addTeamspaceMembers
+      tags: [Teamspaces]
+      summary: Add teamspace members
+      parameters: [ { $ref: '#/components/parameters/teamspaceId' } ]
+      responses:
+        '200': { description: Members added }
+    delete:
+      operationId: removeTeamspaceMembers
+      tags: [Teamspaces]
+      summary: Remove teamspace members
+      parameters: [ { $ref: '#/components/parameters/teamspaceId' } ]
+      responses:
+        '204': { description: Members removed }
+  /api/v0/reports:
+    get:
+      operationId: listReports
+      tags: [Reporting]
+      summary: List available reports
+      responses:
+        '200': { description: A list of reports }
+  /api/v0/reports/{reportId}/jobs:
+    post:
+      operationId: createReportJob
+      tags: [Reporting]
+      summary: Create a report job
+      parameters: [ { $ref: '#/components/parameters/reportId' } ]
+      responses:
+        '202': { description: Job accepted }
+    get:
+      operationId: listReportJobs
+      tags: [Reporting]
+      summary: Get report job status list
+      parameters: [ { $ref: '#/components/parameters/reportId' } ]
+      responses:
+        '200': { description: Job status list }
+  /api/v0/reports/{reportId}/jobs/{jobId}:
+    get:
+      operationId: getReportJob
+      tags: [Reporting]
+      summary: Get a specific report job status
+      parameters:
+        - { $ref: '#/components/parameters/reportId' }
+        - { $ref: '#/components/parameters/jobId' }
+      responses:
+        '200': { description: Job status }
+  /api/v1/reports/query:
+    post:
+      operationId: createInsightsReport
+      tags: [Reporting]
+      summary: Create an Insights report from a SQL query
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                query:
+                  type: string
+                  description: The SQL query representing the report
+                format:
+                  type: string
+                  enum: [csv, xlsx]
+      responses:
+        '200':
+          description: Insights job created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  jobId: { type: string }
+                  status: { type: string, enum: [pending, successful] }
+  /api/v1/reports/jobs/{jobId}:
+    get:
+      operationId: getInsightsReportJob
+      tags: [Reporting]
+      summary: Get Insights report job status
+      parameters: [ { $ref: '#/components/parameters/jobId' } ]
+      responses:
+        '200':
+          description: Job status with download link
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  jobId: { type: string }
+                  status: { type: string }
+                  link:
+                    type: object
+                    properties:
+                      url: { type: string, format: uri }
+  /xapi/v1/statements:
+    post:
+      operationId: postXapiStatements
+      tags: [xAPI]
+      summary: Submit xAPI statements
+      responses:
+        '200': { description: Statements accepted }
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: >-
+        Bearer access token obtained from POST /api/token via the OAuth 2.0
+        client credentials grant.
+    oauth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://{domain}.sana.ai/api/token
+          scopes:
+            read: Read access (required for GET requests)
+            write: Write access (required for POST, PATCH, DELETE requests)
+  parameters:
+    next:
+      name: next
+      in: query
+      required: false
+      description: Cursor to fetch the next batch of results
+      schema: { type: string }
+    limit:
+      name: limit
+      in: query
+      required: false
+      description: Number of items to return (default 100, max 1000)
+      schema: { type: integer, default: 100, maximum: 1000 }
+    userId:
+      name: userId
+      in: path
+      required: true
+      schema: { type: string }
+    groupId:
+      name: groupId
+      in: path
+      required: true
+      schema: { type: string }
+    programId:
+      name: programId
+      in: path
+      required: true
+      schema: { type: string }
+    courseId:
+      name: courseId
+      in: path
+      required: true
+      schema: { type: string }
+    teamspaceId:
+      name: teamspaceId
+      in: path
+      required: true
+      schema: { type: string }
+    reportId:
+      name: reportId
+      in: path
+      required: true
+      schema: { type: string }
+    jobId:
+      name: jobId
+      in: path
+      required: true
+      schema: { type: string }

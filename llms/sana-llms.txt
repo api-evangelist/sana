@@ -1,0 +1,25 @@
+# Sana
+
+> Sana is an enterprise AI platform (now part of Workday) with two products: Sana, an AI knowledge/agent workspace that automates tasks and generates documents across company apps, and Sana Learn, an AI-native learning platform (LMS/LXP). Sana exposes a secure REST API plus SCIM 2.0 provisioning and xAPI webhook events. The API is served per tenant at https://<domain>.sana.ai and authenticated with OAuth 2.0 client credentials (read/write scopes).
+
+## APIs
+- [Sana API Reference](https://docs.sana.ai/api-docs/): REST API for users, groups, programs, assignments, courses, paths, teamspaces, reporting/Insights, and xAPI.
+- [Insights API](https://help.sana.ai/en/articles/323900-insights-api): Asynchronous SQL-query report exports (csv/xlsx).
+
+## Specs
+- [OpenAPI](https://raw.githubusercontent.com/api-evangelist/sana/refs/heads/main/openapi/sana-openapi.yml): OpenAPI 3.1 transcription of the published REST reference.
+
+## Authentication
+- OAuth 2.0 client credentials: POST https://<domain>.sana.ai/api/token (grant_type=client_credentials, scopes read/write), returns a bearer token (expiresIn 3600).
+- SCIM 2.0: https://<domain>.sana.ai/scim/v2 for user provisioning.
+- SSO: SAML 2.0 / OIDC (Okta, Entra, OneLogin, JumpCloud, Google, Auth0, Salesforce).
+
+## Docs
+- [Help Center](https://help.sana.ai/en/)
+- [Security & Integrations](https://help.sana.ai/en/collections/271878-security-and-integrations)
+- [Integration Capabilities](https://help.sana.ai/en/articles/153672-sana-integration-capabilities)
+- [Status](https://status.sana.ai)
+- [Trust Center](https://app.eu.vanta.com/sanalabs/trust/5awpv6z2jqb96ybu60v6ir)
+
+## Compliance
+- ISO 27001, SOC 2, GDPR. Hosted on Google Cloud; encryption AES-128/256 at rest, TLS 1.2 in transit.

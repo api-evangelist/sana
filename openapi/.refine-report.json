@@ -1,0 +1,32 @@
+{
+  "provider": "sana",
+  "sources": [
+    "sana-assignments-api-openapi.yml",
+    "sana-authentication-api-openapi.yml",
+    "sana-courses-api-openapi.yml",
+    "sana-groups-api-openapi.yml",
+    "sana-paths-api-openapi.yml",
+    "sana-programs-api-openapi.yml",
+    "sana-reporting-api-openapi.yml",
+    "sana-teamspaces-api-openapi.yml",
+    "sana-users-api-openapi.yml",
+    "sana-xapi-api-openapi.yml"
+  ],
+  "outputs": [
+    "sana-assignments-api-openapi.yml",
+    "sana-authentication-api-openapi.yml",
+    "sana-courses-api-openapi.yml",
+    "sana-groups-api-openapi.yml",
+    "sana-paths-api-openapi.yml",
+    "sana-programs-api-openapi.yml",
+    "sana-reporting-api-openapi.yml",
+    "sana-teamspaces-api-openapi.yml",
+    "sana-users-api-openapi.yml",
+    "sana-xapi-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

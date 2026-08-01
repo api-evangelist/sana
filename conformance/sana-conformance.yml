@@ -1,0 +1,41 @@
+generated: '2026-07-21'
+method: searched
+source: https://help.sana.ai/en/collections/271878-security-and-integrations
+standards:
+  - id: oauth2
+    conforms: true
+    evidence: OAuth 2.0 client credentials grant at /api/token (openapi securitySchemes)
+  - id: scim-2.0
+    conforms: true
+    evidence: SCIM 2.0 endpoint at /scim/v2 for user provisioning
+    source: https://help.sana.ai/en/articles/23062-how-to-configure-scim
+  - id: saml-2.0-sso
+    conforms: true
+    evidence: SAML 2.0 SSO with Okta, Entra, OneLogin, JumpCloud, Google, Auth0, Salesforce
+    source: https://help.sana.ai/en/articles/23060-setting-up-sso
+  - id: oidc-sso
+    conforms: true
+    evidence: OIDC-based SSO supported
+  - id: xapi-tincan
+    conforms: true
+    evidence: xAPI (Experience API / Tin Can) statement endpoint /xapi/v1/statements and xAPI webhook events
+    source: https://help.sana.ai/en/articles/153672-sana-integration-capabilities
+  - id: scorm
+    conforms: true
+    evidence: SCORM import/export connector for external courses
+    source: https://help.sana.ai/en/articles/29756-introduction-to-scorm-connector
+  - id: soc2
+    conforms: true
+    evidence: SOC 2 (security, availability, processing integrity, confidentiality, privacy)
+    source: https://help.sana.ai/en/articles/153270-sana-s-security-and-infrastructure-setup
+  - id: iso-27001
+    conforms: true
+    evidence: ISMS certified under ISO/IEC 27001
+    source: https://help.sana.ai/en/articles/153270-sana-s-security-and-infrastructure-setup
+  - id: gdpr
+    conforms: true
+    evidence: Compliant with the EU General Data Protection Regulation
+    source: https://help.sana.ai/en/articles/153270-sana-s-security-and-infrastructure-setup
+  - id: rfc9457-problem-details
+    conforms: false
+    evidence: No application/problem+json error format documented

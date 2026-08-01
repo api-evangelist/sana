@@ -1,0 +1,12 @@
+generated: '2026-07-21'
+method: generated
+source: openapi/sana-openapi.yml
+skills:
+  - file: sana-provision-users-and-enroll.md
+    name: Provision users and enroll them in a program
+    api: openapi/sana-openapi.yml
+    operations: [createAccessToken, listUsers, createUser, listPrograms, enrollProgramMembers]
+  - file: sana-export-insights-report.md
+    name: Export an Insights report
+    api: openapi/sana-openapi.yml
+    operations: [createAccessToken, createInsightsReport, getInsightsReportJob]

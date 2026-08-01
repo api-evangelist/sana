@@ -1,0 +1,23 @@
+generated: '2026-07-21'
+method: searched
+source: https://help.sana.ai/en/articles/153672-sana-integration-capabilities
+type: Webhooks
+summary: >-
+  Sana streams learning activity as xAPI (Experience API) statements to a customer-configured
+  webhook in real time, for completion reporting and data synchronization. Statements can also
+  be submitted to Sana via the xAPI statement endpoint.
+delivery:
+  transport: HTTP POST
+  payload_format: xAPI statements (Experience API / Tin Can)
+  direction: outbound (Sana -> customer webhook)
+  auth: OAuth 2.0 token (/api/oauth/token)
+inbound_endpoint:
+  method: POST
+  path: /xapi/v1/statements
+  operation: openapi/sana-openapi.yml#postXapiStatements
+events:
+  - name: xapi.statement
+    description: A learner activity statement (e.g. course completion, progress) emitted as an xAPI statement.
+notes:
+  - No AsyncAPI document is published by Sana; this captures the documented webhook/event surface.
+  - Real-time export is one of two documented modes; the other is periodic file/spreadsheet/dataframe export via the Reporting API.

@@ -1,0 +1,15 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Sana API
+  version: 1.0.0
+extends: openapi/sana-openapi.yml
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-enriched: '2026-07-21'
+      x-api-evangelist-source: https://docs.sana.ai/api-docs/
+  - target: $.info
+    update:
+      x-authentication: authentication/sana-authentication.yml
+      x-conventions: conventions/sana-conventions.yml
+      x-data-model: data-model/sana-data-model.yml

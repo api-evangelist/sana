@@ -1,0 +1,20 @@
+generated: '2026-07-21'
+method: searched
+source: https://docs.sana.ai/api-docs/
+docs: https://docs.sana.ai/api-docs/
+schemes:
+  - name: oauth2ClientCredentials
+    source: https://docs.sana.ai/api-docs/
+    flows:
+      - flow: clientCredentials
+        tokenUrl: https://{domain}.sana.ai/api/token
+scope_format: comma-separated
+scopes:
+  - scope: read
+    description: Read access. Required for all GET requests.
+    flows: [clientCredentials]
+    sources: [https://docs.sana.ai/api-docs/]
+  - scope: write
+    description: Write access. Required for all POST, PATCH, and DELETE requests.
+    flows: [clientCredentials]
+    sources: [https://docs.sana.ai/api-docs/]

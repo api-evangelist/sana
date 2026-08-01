@@ -1,0 +1,20 @@
+generated: '2026-07-21'
+method: searched
+source: https://docs.sana.ai/api-docs/
+versioning:
+  scheme: uri-path
+  versions_in_use: [v0, v1]
+  docs: https://docs.sana.ai/api-docs/
+status_page:
+  url: https://status.sana.ai
+  platform: incident.io
+  uptime_reported: '99.91%'
+sla:
+  uptime_note: 'Average yearly downtime less than 0.001% (per security documentation)'
+  source: https://help.sana.ai/en/articles/153270-sana-s-security-and-infrastructure-setup
+changelog:
+  url: https://help.sana.ai/en/collections/271878-security-and-integrations
+  note: Sana Learn publishes a product changelog; API reference is versioned via URI path.
+deprecation:
+  policy_documented: false
+deprecated_operations: []

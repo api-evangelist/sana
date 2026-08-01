@@ -1,0 +1,50 @@
+generated: '2026-07-21'
+method: searched
+source: https://docs.sana.ai/api-docs/
+docs: https://docs.sana.ai/api-docs/
+authentication:
+  style: oauth2-client-credentials + bearer
+  token_endpoint: https://{domain}.sana.ai/api/token
+  header: 'Authorization: Bearer <accessToken>'
+  scopes: [read, write]
+  ref: authentication/sana-authentication.yml
+base_url:
+  pattern: https://{domain}.sana.ai
+  note: The API is served per tenant; {domain} is the workspace subdomain.
+content_type: application/json
+versioning:
+  scheme: uri-path
+  versions_in_use: [v0, v1]
+  note: >-
+    Most resources are under /api/v0; newer operations (native course creation,
+    bulk link upsert, Insights query) are under /api/v1. xAPI is under /xapi/v1.
+pagination:
+  style: cursor
+  request_params:
+    - name: next
+      description: Cursor set to fetch the next batch
+    - name: limit
+      description: Number of items to return (default 100, max 1000)
+  response_fields:
+    - name: links
+      description: Object containing the next page URL
+idempotency:
+  supported: false
+  note: No idempotency-key header is documented in the Sana API reference.
+async_jobs:
+  pattern: >-
+    Reporting/Insights operations are asynchronous. A create-job request returns a
+    jobId with a pending status; poll the job-status endpoint until successful, then
+    download from the returned link.url.
+  create: POST /api/v1/reports/query
+  poll: GET /api/v1/reports/jobs/{jobId}
+  legacy_create: POST /api/v0/reports/{reportId}/jobs
+  legacy_poll: GET /api/v0/reports/{reportId}/jobs/{jobId}
+error_handling:
+  ref: errors/sana-problem-types.yml
+rate_limiting:
+  documented: false
+events:
+  webhooks: true
+  mechanism: xAPI statements streamed to a webhook (real-time learning data)
+  ref: asyncapi/sana-events-webhooks.yml
