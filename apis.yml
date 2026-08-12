@@ -217,6 +217,8 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: Overlay
+  url: overlays/sana-openapi-overlay.yaml
 - type: DomainSecurity
   url: security/sana-domain-security.yml
 - type: Website
