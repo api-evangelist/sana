@@ -1,0 +1,150 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Sana Assignments Programs API",
+    "version": "v0/v1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Programs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List programs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{domain}.sana.ai/api/v0/programs",
+            "params": [
+              {
+                "name": "next",
+                "value": "",
+                "type": "query",
+                "description": "Cursor to fetch the next batch of results"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of items to return (default 100, max 1000)"
+              }
+            ]
+          },
+          "docs": "List programs"
+        },
+        {
+          "info": {
+            "name": "Create a program",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{domain}.sana.ai/api/v0/programs"
+          },
+          "docs": "Create a program"
+        },
+        {
+          "info": {
+            "name": "Retrieve a program",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{domain}.sana.ai/api/v0/programs/:programId",
+            "params": [
+              {
+                "name": "programId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve a program"
+        },
+        {
+          "info": {
+            "name": "Update a program",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://{domain}.sana.ai/api/v0/programs/:programId",
+            "params": [
+              {
+                "name": "programId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Update a program"
+        },
+        {
+          "info": {
+            "name": "Delete a program",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{domain}.sana.ai/api/v0/programs/:programId",
+            "params": [
+              {
+                "name": "programId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete a program"
+        },
+        {
+          "info": {
+            "name": "Enroll users in a program",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{domain}.sana.ai/api/v0/programs/:programId/members",
+            "params": [
+              {
+                "name": "programId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Enroll users in a program"
+        },
+        {
+          "info": {
+            "name": "Unenroll users from a program",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{domain}.sana.ai/api/v0/programs/:programId/members",
+            "params": [
+              {
+                "name": "programId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Unenroll users from a program"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

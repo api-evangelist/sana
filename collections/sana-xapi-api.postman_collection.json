@@ -1,0 +1,133 @@
+{
+  "item": [
+    {
+      "id": "3a290525-7fec-4bb0-a3dd-1fe17d0334c4",
+      "name": "xAPI",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "705279c6-6e8a-443f-a7bf-442bcda1f37c",
+          "name": "Submit xAPI statements",
+          "request": {
+            "name": "Submit xAPI statements",
+            "description": {},
+            "url": {
+              "path": [
+                "xapi",
+                "v1",
+                "statements"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Your Sana workspace subdomain",
+                  "type": "any",
+                  "value": "{{domain}}",
+                  "key": "domain"
+                }
+              ]
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f2c32edc-d7f8-4789-a246-088aa5ccd6a8",
+              "name": "Statements accepted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "xapi",
+                    "v1",
+                    "statements"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Sana workspace subdomain",
+                      "type": "any",
+                      "value": "{{domain}}",
+                      "key": "domain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Your Sana workspace subdomain",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "app",
+      "key": "domain"
+    },
+    {
+      "type": "string",
+      "value": "https://{{domain}}.sana.ai",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "21ff66cf-be3c-46ac-8253-9b454e4601b3",
+    "name": "Sana Assignments xAPI API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Sana's REST API for the Sana AI knowledge/learning platform. Programmatic access to users, groups, programs, assignments, courses, paths, teamspaces, reporting/Insights, and xAPI statements. Authentication is OAuth 2.0 client credentials returning a bearer token; GET requests require the `read` scope and write requests require the `write` scope. The API is served per tenant at https://<domain>.sana.ai.\n\nContact Support:\n Name: Sana API Documentation",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,136 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Sana Assignments Teamspaces API",
+    "version": "v0/v1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Teamspaces",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List teamspaces",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{domain}.sana.ai/api/v0/teamspaces"
+          },
+          "docs": "List teamspaces"
+        },
+        {
+          "info": {
+            "name": "Create a teamspace",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{domain}.sana.ai/api/v0/teamspaces"
+          },
+          "docs": "Create a teamspace"
+        },
+        {
+          "info": {
+            "name": "Retrieve a teamspace",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{domain}.sana.ai/api/v0/teamspaces/:teamspaceId",
+            "params": [
+              {
+                "name": "teamspaceId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve a teamspace"
+        },
+        {
+          "info": {
+            "name": "Delete a teamspace",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{domain}.sana.ai/api/v0/teamspaces/:teamspaceId",
+            "params": [
+              {
+                "name": "teamspaceId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete a teamspace"
+        },
+        {
+          "info": {
+            "name": "List teamspace members",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{domain}.sana.ai/api/v0/teamspaces/:teamspaceId/members",
+            "params": [
+              {
+                "name": "teamspaceId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List teamspace members"
+        },
+        {
+          "info": {
+            "name": "Add teamspace members",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{domain}.sana.ai/api/v0/teamspaces/:teamspaceId/members",
+            "params": [
+              {
+                "name": "teamspaceId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Add teamspace members"
+        },
+        {
+          "info": {
+            "name": "Remove teamspace members",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{domain}.sana.ai/api/v0/teamspaces/:teamspaceId/members",
+            "params": [
+              {
+                "name": "teamspaceId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Remove teamspace members"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

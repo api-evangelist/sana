@@ -1,0 +1,127 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Sana Assignments Reporting API",
+    "version": "v0/v1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Reporting",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List available reports",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{domain}.sana.ai/api/v0/reports"
+          },
+          "docs": "List available reports"
+        },
+        {
+          "info": {
+            "name": "Get report job status list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{domain}.sana.ai/api/v0/reports/:reportId/jobs",
+            "params": [
+              {
+                "name": "reportId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get report job status list"
+        },
+        {
+          "info": {
+            "name": "Create a report job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{domain}.sana.ai/api/v0/reports/:reportId/jobs",
+            "params": [
+              {
+                "name": "reportId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Create a report job"
+        },
+        {
+          "info": {
+            "name": "Get a specific report job status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{domain}.sana.ai/api/v0/reports/:reportId/jobs/:jobId",
+            "params": [
+              {
+                "name": "reportId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "jobId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a specific report job status"
+        },
+        {
+          "info": {
+            "name": "Create an Insights report from a SQL query",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{domain}.sana.ai/api/v1/reports/query",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create an Insights report from a SQL query"
+        },
+        {
+          "info": {
+            "name": "Get Insights report job status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{domain}.sana.ai/api/v1/reports/jobs/:jobId",
+            "params": [
+              {
+                "name": "jobId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Insights report job status"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

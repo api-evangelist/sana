@@ -2,34 +2,39 @@ generated: '2026-07-21'
 method: derived
 status: candidate
 source: openapi/sana-openapi.yml
-note: >-
-  No official hosted/remote MCP server for Sana was found. This is a candidate tool list
-  derived from the documented REST API operations, one tool per marquee operation.
+note: No official hosted/remote MCP server for Sana was found. This is a candidate tool list derived from
+  the documented REST API operations, one tool per marquee operation.
 server:
   name: sana
   transport: http
 tools:
-  - name: list_users
-    description: List all users in the workspace
-    source_operation: openapi/sana-openapi.yml#listUsers
-  - name: create_user
-    description: Create a user
-    source_operation: openapi/sana-openapi.yml#createUser
-  - name: list_groups
-    description: List all groups
-    source_operation: openapi/sana-openapi.yml#listGroups
-  - name: enroll_program_members
-    description: Enroll users in a program
-    source_operation: openapi/sana-openapi.yml#enrollProgramMembers
-  - name: list_courses
-    description: List courses
-    source_operation: openapi/sana-openapi.yml#listCourses
-  - name: assign_content_to_user
-    description: Assign content to a user
-    source_operation: openapi/sana-openapi.yml#assignContentToUser
-  - name: create_insights_report
-    description: Create an Insights report from a SQL query
-    source_operation: openapi/sana-openapi.yml#createInsightsReport
-  - name: get_insights_report_job
-    description: Poll an Insights report job for its download link
-    source_operation: openapi/sana-openapi.yml#getInsightsReportJob
+- name: list_users
+  description: List all users in the workspace
+  source_operation: openapi/sana-openapi.yml#listUsers
+- name: create_user
+  description: Create a user
+  source_operation: openapi/sana-openapi.yml#createUser
+- name: list_groups
+  description: List all groups
+  source_operation: openapi/sana-openapi.yml#listGroups
+- name: enroll_program_members
+  description: Enroll users in a program
+  source_operation: openapi/sana-openapi.yml#enrollProgramMembers
+- name: list_courses
+  description: List courses
+  source_operation: openapi/sana-openapi.yml#listCourses
+- name: assign_content_to_user
+  description: Assign content to a user
+  source_operation: openapi/sana-openapi.yml#assignContentToUser
+- name: create_insights_report
+  description: Create an Insights report from a SQL query
+  source_operation: openapi/sana-openapi.yml#createInsightsReport
+- name: get_insights_report_job
+  description: Poll an Insights report job for its download link
+  source_operation: openapi/sana-openapi.yml#getInsightsReportJob
+deployment:
+  mode: none
+  verified: derived
+  tools: 8
+  checked: '2026-08-12'
+  source: catalog MCP census

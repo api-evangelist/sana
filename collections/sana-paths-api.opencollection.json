@@ -1,0 +1,67 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Sana Assignments Paths API",
+    "version": "v0/v1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Paths",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List paths",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{domain}.sana.ai/api/v0/paths",
+            "params": [
+              {
+                "name": "next",
+                "value": "",
+                "type": "query",
+                "description": "Cursor to fetch the next batch of results"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of items to return (default 100, max 1000)"
+              }
+            ]
+          },
+          "docs": "List paths"
+        },
+        {
+          "info": {
+            "name": "Retrieve a path",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{domain}.sana.ai/api/v0/paths/:pathId",
+            "params": [
+              {
+                "name": "pathId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve a path"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

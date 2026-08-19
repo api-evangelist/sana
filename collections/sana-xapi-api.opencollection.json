@@ -1,0 +1,35 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Sana Assignments xAPI API",
+    "version": "v0/v1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "xAPI",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Submit xAPI statements",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{domain}.sana.ai/xapi/v1/statements"
+          },
+          "docs": "Submit xAPI statements"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,182 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Sana Assignments Courses API",
+    "version": "v0/v1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Courses",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List courses",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{domain}.sana.ai/api/v0/courses",
+            "params": [
+              {
+                "name": "next",
+                "value": "",
+                "type": "query",
+                "description": "Cursor to fetch the next batch of results"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of items to return (default 100, max 1000)"
+              }
+            ]
+          },
+          "docs": "List courses"
+        },
+        {
+          "info": {
+            "name": "Create a link course",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{domain}.sana.ai/api/v0/courses"
+          },
+          "docs": "Create a link course"
+        },
+        {
+          "info": {
+            "name": "Create a native course",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{domain}.sana.ai/api/v1/courses"
+          },
+          "docs": "Create a native course"
+        },
+        {
+          "info": {
+            "name": "Bulk create/update link courses",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{domain}.sana.ai/api/v1/courses/bulk-link-upsert"
+          },
+          "docs": "Bulk create/update link courses"
+        },
+        {
+          "info": {
+            "name": "Retrieve a course",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{domain}.sana.ai/api/v0/courses/:courseId",
+            "params": [
+              {
+                "name": "courseId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve a course"
+        },
+        {
+          "info": {
+            "name": "Update a course",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://{domain}.sana.ai/api/v0/courses/:courseId",
+            "params": [
+              {
+                "name": "courseId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Update a course"
+        },
+        {
+          "info": {
+            "name": "Delete a course",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{domain}.sana.ai/api/v0/courses/:courseId",
+            "params": [
+              {
+                "name": "courseId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete a course"
+        },
+        {
+          "info": {
+            "name": "Mark a course as completed for a user",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{domain}.sana.ai/api/v0/courses/:courseId/completed/:userId",
+            "params": [
+              {
+                "name": "courseId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Mark a course as completed for a user"
+        },
+        {
+          "info": {
+            "name": "Reset a user's course progress",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{domain}.sana.ai/api/v0/courses/:courseId/reset/:userId",
+            "params": [
+              {
+                "name": "courseId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Reset a user's course progress"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
