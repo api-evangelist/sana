@@ -1,0 +1,52 @@
+slug: sana
+provider: Sana
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Education
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 4
+edges:
+- tag: Assignments
+  spec_file: sana-assignments-api-openapi.yml
+  capability_id: BC-300.40
+  capability_id_l1: BC-300
+  capability_name: Learning & Development Management
+  confidence: 0.75
+  evidence: POST /api/v0/users/{userId}/assignments  assignContentToUser  Assign content to a user
+  reason: Assigns learning content to individual users on an enterprise LMS/LXP; this is corporate training
+    administration, i.e. Learning & Development, rather than academic enrolment.
+- tag: Reporting
+  spec_file: sana-reporting-api-openapi.yml
+  capability_id: BC-610.50
+  capability_id_l1: BC-610
+  capability_name: Analytics & BI Management
+  confidence: 0.72
+  evidence: POST /api/v1/reports/query  createInsightsReport  Create an Insights report from a SQL query
+  reason: Report catalogue, asynchronous report jobs and SQL-driven Insights reports are analytics/BI
+    delivery rather than a domain-specific capability.
+- tag: Courses
+  spec_file: sana-courses-api-openapi.yml
+  capability_id: BC-300.40
+  capability_id_l1: BC-300
+  capability_name: Learning & Development Management
+  confidence: 0.7
+  evidence: POST /api/v1/courses  createNativeCourse  Create a native course; POST /api/v0/courses/{courseId}/completed/{userId}  markCourseCompleted
+  reason: Course creation plus per-user completion and progress reset on an enterprise learning platform
+    is training/capability-building administration (L&D). Academic curriculum design is not the vendor's
+    context (enterprise, not institutional).
+- tag: Programs
+  spec_file: sana-programs-api-openapi.yml
+  capability_id: BC-300.40
+  capability_id_l1: BC-300
+  capability_name: Learning & Development Management
+  confidence: 0.7
+  evidence: POST /api/v0/programs/{programId}/members  enrollProgramMembers  Enroll users in a program
+  reason: Learning programme lifecycle plus enrolment of users on an enterprise learning platform maps
+    to Learning & Development administration.

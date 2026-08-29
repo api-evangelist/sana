@@ -244,6 +244,9 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: CapabilityMap
+  url: capabilities/sana-capability-edges.yml
+  name: Sana Business Capability Map
 - type: Overlay
   url: overlays/sana-openapi-overlay.yaml
 - type: DomainSecurity
