@@ -222,16 +222,16 @@ apis:
     url: scopes/sana-scopes.yml
   - type: DataModel
     url: data-model/sana-data-model.yml
-- aid: sana:sana-xapi-api
-  name: Sana xAPI API
-  description: The xAPI API from Sana — 1 operation(s) for xapi.
+- aid: sana:sana-x-api-api
+  name: Sana x API
+  description: The x API API from Sana — 1 operation(s) for x api.
   humanURL: https://docs.sana.ai/api-docs/
   baseURL: https://app.sana.ai
   tags:
-  - xAPI
+  - x API
   properties:
   - type: OpenAPI
-    url: openapi/sana-xapi-api-openapi.yml
+    url: openapi/sana-x-api-api-openapi.yml
   - type: Authentication
     url: authentication/sana-authentication.yml
   - type: OAuthScopes
