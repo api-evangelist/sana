@@ -228,6 +228,8 @@ apis:
   humanURL: https://docs.sana.ai/api-docs/
   baseURL: https://app.sana.ai
   tags:
+  - xAPI
+  tags_raw:
   - x API
   properties:
   - type: OpenAPI
