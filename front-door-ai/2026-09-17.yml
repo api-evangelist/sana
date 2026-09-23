@@ -1,0 +1,27 @@
+# Front Door AI Index — sana — 2026-09-17
+# AI vocabulary counted on the provider's root page. Generated; do not edit.
+# `score` is null unless ownership is `own` — see front_door_ai.py.
+front_door_ai:
+  slug: sana
+  lexicon_version: '1.0'
+  probed_at: '2026-09-17'
+  host: www.sanalabs.com
+  final_host: sanalabs.com
+  ownership: own
+  owner: sana
+  shares_host_with: null
+  inherited_from: null
+  verdict: scored
+  score: 13
+  host_score: 13
+  density: 36.72
+  words: 354
+  tiers:
+    agentic: 1
+    core: 12
+    model: 0
+  ambiguous: 1
+  top_terms:
+    AI: 12
+    AI agent: 1
+    agent: 1

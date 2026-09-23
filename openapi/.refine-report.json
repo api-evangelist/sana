@@ -1,16 +1,7 @@
 {
   "provider": "sana",
   "sources": [
-    "sana-assignments-api-openapi.yml",
-    "sana-authentication-api-openapi.yml",
-    "sana-courses-api-openapi.yml",
-    "sana-groups-api-openapi.yml",
-    "sana-paths-api-openapi.yml",
-    "sana-programs-api-openapi.yml",
-    "sana-reporting-api-openapi.yml",
-    "sana-teamspaces-api-openapi.yml",
-    "sana-users-api-openapi.yml",
-    "sana-xapi-api-openapi.yml"
+    "_original/sana-openapi.yml"
   ],
   "outputs": [
     "sana-assignments-api-openapi.yml",
@@ -24,9 +15,27 @@
     "sana-users-api-openapi.yml",
     "sana-xapi-api-openapi.yml"
   ],
-  "archived": [],
+  "archived": [
+    "deleted 1 superseded output(s) from the previous generation"
+  ],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "sana-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "superseded outputs removed: sana-x-api-api-openapi.yml",
+    "apis.yml register: written (+1 apis, 10 total)"
+  ],
+  "skipped": [
+    "sana-assignments-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "sana-authentication-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "sana-courses-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "sana-groups-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "sana-paths-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "sana-programs-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "sana-reporting-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "sana-teamspaces-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "sana-users-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "sana-x-api-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

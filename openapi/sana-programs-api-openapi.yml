@@ -1,8 +1,8 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Sana Assignments Programs API
+  title: Sana Programs API
   version: v0/v1
-  description: Sana's REST API for the Sana AI knowledge/learning platform. Programmatic access to users, groups, programs, assignments, courses, paths, teamspaces, reporting/Insights, and xAPI statements. Authentication is OAuth 2.0 client credentials returning a bearer token; GET requests require the `read` scope and write requests require the `write` scope. The API is served per tenant at https://<domain>.sana.ai.
+  description: Sana's REST API for the Sana AI knowledge/learning platform. Programmatic access to users, groups, programs, assignments, courses, paths, teamspaces, reporting/Insights, and xAPI statements. Authentication is OAuth 2.0 client credentials returning a bearer token; GET requests require the `read` scope and write requests require the `write` scope. The API is served per tenant at https://.sana.ai.
   contact:
     name: Sana API Documentation
     url: https://docs.sana.ai/api-docs/
@@ -92,12 +92,6 @@ paths:
           description: Users unenrolled
 components:
   parameters:
-    programId:
-      name: programId
-      in: path
-      required: true
-      schema:
-        type: string
     limit:
       name: limit
       in: query
@@ -107,6 +101,12 @@ components:
         type: integer
         default: 100
         maximum: 1000
+    programId:
+      name: programId
+      in: path
+      required: true
+      schema:
+        type: string
     next:
       name: next
       in: query
