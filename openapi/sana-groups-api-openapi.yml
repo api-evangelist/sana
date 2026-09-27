@@ -115,6 +115,19 @@ paths:
           description: User removed from group
 components:
   parameters:
+    next:
+      name: next
+      in: query
+      required: false
+      description: Cursor to fetch the next batch of results
+      schema:
+        type: string
+    groupId:
+      name: groupId
+      in: path
+      required: true
+      schema:
+        type: string
     limit:
       name: limit
       in: query
@@ -124,19 +137,6 @@ components:
         type: integer
         default: 100
         maximum: 1000
-    groupId:
-      name: groupId
-      in: path
-      required: true
-      schema:
-        type: string
-    next:
-      name: next
-      in: query
-      required: false
-      description: Cursor to fetch the next batch of results
-      schema:
-        type: string
     userId:
       name: userId
       in: path

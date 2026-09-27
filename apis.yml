@@ -57,7 +57,7 @@ tags:
 - Artificial Intelligence
 - Learning Management
 - LMS
-- Knowledge-Management
+- Knowledge Management
 - Agents
 - SCIM
 - xAPI
@@ -73,6 +73,7 @@ tags_raw:
 - SCIM
 - xAPI
 - REST API
+- Knowledge-Management
 apis:
 - aid: sana:sana-assignments-api
   name: Sana Assignments API
@@ -228,8 +229,6 @@ apis:
   humanURL: https://docs.sana.ai/api-docs/
   baseURL: https://app.sana.ai
   tags:
-  - xAPI
-  tags_raw:
   - x API
   properties:
   - type: OpenAPI
