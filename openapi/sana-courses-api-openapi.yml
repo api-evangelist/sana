@@ -113,13 +113,6 @@ paths:
           description: Progress reset
 components:
   parameters:
-    next:
-      name: next
-      in: query
-      required: false
-      description: Cursor to fetch the next batch of results
-      schema:
-        type: string
     courseId:
       name: courseId
       in: path
@@ -139,6 +132,13 @@ components:
       name: userId
       in: path
       required: true
+      schema:
+        type: string
+    next:
+      name: next
+      in: query
+      required: false
+      description: Cursor to fetch the next batch of results
       schema:
         type: string
   securitySchemes:

@@ -92,19 +92,6 @@ paths:
           description: Users unenrolled
 components:
   parameters:
-    next:
-      name: next
-      in: query
-      required: false
-      description: Cursor to fetch the next batch of results
-      schema:
-        type: string
-    programId:
-      name: programId
-      in: path
-      required: true
-      schema:
-        type: string
     limit:
       name: limit
       in: query
@@ -114,6 +101,19 @@ components:
         type: integer
         default: 100
         maximum: 1000
+    programId:
+      name: programId
+      in: path
+      required: true
+      schema:
+        type: string
+    next:
+      name: next
+      in: query
+      required: false
+      description: Cursor to fetch the next batch of results
+      schema:
+        type: string
   securitySchemes:
     bearerAuth:
       type: http
