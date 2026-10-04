@@ -115,17 +115,14 @@ paths:
           description: User removed from group
 components:
   parameters:
-    limit:
-      name: limit
-      in: query
-      required: false
-      description: Number of items to return (default 100, max 1000)
-      schema:
-        type: integer
-        default: 100
-        maximum: 1000
     userId:
       name: userId
+      in: path
+      required: true
+      schema:
+        type: string
+    groupId:
+      name: groupId
       in: path
       required: true
       schema:
@@ -137,12 +134,15 @@ components:
       description: Cursor to fetch the next batch of results
       schema:
         type: string
-    groupId:
-      name: groupId
-      in: path
-      required: true
+    limit:
+      name: limit
+      in: query
+      required: false
+      description: Number of items to return (default 100, max 1000)
       schema:
-        type: string
+        type: integer
+        default: 100
+        maximum: 1000
   securitySchemes:
     bearerAuth:
       type: http

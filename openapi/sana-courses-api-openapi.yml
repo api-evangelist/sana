@@ -113,23 +113,14 @@ paths:
           description: Progress reset
 components:
   parameters:
-    courseId:
-      name: courseId
+    userId:
+      name: userId
       in: path
       required: true
       schema:
         type: string
-    limit:
-      name: limit
-      in: query
-      required: false
-      description: Number of items to return (default 100, max 1000)
-      schema:
-        type: integer
-        default: 100
-        maximum: 1000
-    userId:
-      name: userId
+    courseId:
+      name: courseId
       in: path
       required: true
       schema:
@@ -141,6 +132,15 @@ components:
       description: Cursor to fetch the next batch of results
       schema:
         type: string
+    limit:
+      name: limit
+      in: query
+      required: false
+      description: Number of items to return (default 100, max 1000)
+      schema:
+        type: integer
+        default: 100
+        maximum: 1000
   securitySchemes:
     bearerAuth:
       type: http
