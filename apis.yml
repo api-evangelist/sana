@@ -45,7 +45,7 @@ x-tier: stub
 x-tier-reason: portfolio-lead
 specificationVersion: '0.23'
 created: '2026-07-17'
-modified: '2026-07-21'
+modified: '2026-10-06'
 x-enrichment:
   date: '2026-07-21'
   status: enriched
@@ -245,6 +245,8 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- url: https://sanalabs.com/products/sana/stories
+  type: Blog
 - type: CapabilityMap
   url: capabilities/sana-capability-edges.yml
   name: Sana Business Capability Map
