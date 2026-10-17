@@ -124,14 +124,14 @@ paths:
                         format: uri
 components:
   parameters:
-    reportId:
-      name: reportId
+    jobId:
+      name: jobId
       in: path
       required: true
       schema:
         type: string
-    jobId:
-      name: jobId
+    reportId:
+      name: reportId
       in: path
       required: true
       schema:
